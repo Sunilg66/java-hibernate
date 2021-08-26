@@ -13,9 +13,7 @@ public class DryFruitDAOImpl implements DryFruitDAO {
 
 	@Override
 	public int save(DryFruitDTO entity) {
-		Configuration config = new Configuration();
-		config.configure();
-		config.addAnnotatedClass(DryFruitDTO.class);
+		Configuration config = createdConfig();
 		SessionFactory factory = config.buildSessionFactory();
 		Session session = factory.openSession();
 		Transaction tr = session.beginTransaction();
@@ -28,55 +26,52 @@ public class DryFruitDAOImpl implements DryFruitDAO {
 	}
 
 	@Override
-	public int read(DryFruitDTO entity) {
-		Configuration config = new Configuration();
-		config.configure();
-		config.addAnnotatedClass(DryFruitDTO.class);
+	public void read(int id) {
+		Configuration config = createdConfig();
 		SessionFactory factory = config.buildSessionFactory();
 		Session session = factory.openSession();
 		Transaction tr = session.beginTransaction();
-		DryFruitDTO dt = (DryFruitDTO) session.get(DryFruitDTO.class, 1);
+		DryFruitDTO dt = (DryFruitDTO) session.get(DryFruitDTO.class, id);
 		System.out.println(dt);
 		tr.commit();
 		session.close();
 		factory.close();
-
-		return 1;
 	}
 
-	@Override
-	public int update(DryFruitDTO entity) {
+	private Configuration createdConfig() {
 		Configuration config = new Configuration();
 		config.configure();
 		config.addAnnotatedClass(DryFruitDTO.class);
+		return config;
+	}
+
+	@Override
+	public void update(DryFruitDTO entity) {
+		Configuration config = createdConfig();
 		SessionFactory sf = config.buildSessionFactory();
 		Session session = sf.openSession();
 		Transaction tr = session.beginTransaction();
 		dt = (DryFruitDTO) session.get(DryFruitDTO.class, 2);
 		dt.setName("Pista");
-		session.update(dt);
+		session.update(entity);
 		session.getTransaction().commit();
 		System.out.println("updated name : " + dt);
 		session.close();
-		return 1;
 	}
 
 	@Override
-	public int delete(DryFruitDTO entity) {
-		Configuration con = new Configuration();
-		con.configure();
-		con.addAnnotatedClass(DryFruitDTO.class);
+	public void delete(DryFruitDTO entity) {
+		Configuration con = createdConfig();
 		SessionFactory sessionfact = con.buildSessionFactory();
 		Session session = sessionfact.openSession();
+		Transaction tr = session.beginTransaction();
 		Object obj = session.load(DryFruitDTO.class, new Integer(1));
 		DryFruitDTO dt = (DryFruitDTO) obj;
-		Transaction tr = session.beginTransaction();
-		session.delete(dt);
+		session.delete(entity);
 		System.out.println("data at first row as been deleted");
 		tr.commit();
 		session.close();
 		sessionfact.close();
-		return 1;
 	}
 
 }

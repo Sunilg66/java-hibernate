@@ -13,7 +13,7 @@ public class DryFruitTester {
 
 		DryFruitDAO dao = new DryFruitDAOImpl();
 
-		dao.read(dto);
+		dao.read(1);
 
 		dao.save(dto);
 

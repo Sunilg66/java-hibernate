@@ -13,7 +13,7 @@ public class SoapTester {
 
 		SoapDAO dao = new SoapDAOImpl();
 
-		dao.read(dto);
+		dao.read(2);
 		
 		dao.save(dto);
 

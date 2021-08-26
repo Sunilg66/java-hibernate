@@ -6,10 +6,10 @@ public interface DryFruitDAO {
 
 	int save(DryFruitDTO entity);
 
-	int read(DryFruitDTO entity);
+	void read(int id);
 
-	int update(DryFruitDTO entity);
+	void update(DryFruitDTO entity);
 
-	int delete(DryFruitDTO entity);
+	void delete(DryFruitDTO entity);
 
 }

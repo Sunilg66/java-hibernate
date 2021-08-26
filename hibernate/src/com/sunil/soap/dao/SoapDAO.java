@@ -6,11 +6,11 @@ public interface SoapDAO {
 	
 	int save(SoapDTO entity);
 	
-	int saveAndUpdate(SoapDTO entity);
+	void saveAndUpdate(SoapDTO entity);
 	
-	int delete(SoapDTO entity);
+	void delete(SoapDTO entity);
 	
-	int read(SoapDTO entity);
+	void read(int id);
 	
 
 }
