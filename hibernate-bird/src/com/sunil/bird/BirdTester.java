@@ -9,7 +9,7 @@ public class BirdTester {
 
 	public static void main(String[] args) {
 		
-		BirdEntity entity = new BirdEntity(3,"Hummingbird","Redwithblue",2,true,BirdType.HUMMINGBIRD,5,true,"short",false);
+		BirdEntity entity = new BirdEntity(5,"Sparrow","brown",2,true,BirdType.HUMMINGBIRD,4,true,"short",false);
 		
 		BirdDAO dao = new BirdDAOImpl();
 		dao.save(entity);
@@ -18,6 +18,9 @@ public class BirdTester {
 		System.out.println(en);
 		
 
+		dao.updateNameById(2, "Penguine");
+		
+		dao.deleteById(1);
 	}
 
 }
