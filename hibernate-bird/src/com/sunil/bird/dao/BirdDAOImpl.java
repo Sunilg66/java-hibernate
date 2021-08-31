@@ -9,7 +9,7 @@ import com.sunil.bird.util.SFUtil;
 
 public class BirdDAOImpl implements BirdDAO{
 	
-	BirdEntity entity = null;
+
 
 	@Override
 	public int save(BirdEntity entity) {
