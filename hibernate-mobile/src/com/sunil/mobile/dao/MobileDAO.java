@@ -8,7 +8,7 @@ public interface MobileDAO {
 	
 	void read(int id);
 	
-	double readPriceByName();
+	double readPriceByName(String name);
 	
 	double readTotalPrice();
 	
@@ -16,7 +16,7 @@ public interface MobileDAO {
 	
 	double readMinPrice();
 	
-	int updatePriceById();
+	void updatePriceByName(double price,String name);
 	
 	
 

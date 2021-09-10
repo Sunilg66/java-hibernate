@@ -3,27 +3,29 @@ package com.sunil.mobile;
 import com.sunil.mobile.dao.MobileDAO;
 import com.sunil.mobile.dao.MobileDAOImpl;
 import com.sunil.mobile.entity.MobileEntity;
+import com.sunil.mobile.service.MobileService;
+import com.sunil.mobile.service.MobileServiceImpl;
 
 public class MobileTester {
 	public static void main(String[] args) {
-		MobileEntity entity = new MobileEntity("VIVO V15", "Red", true,6500);
-		MobileEntity entity1 = new MobileEntity("SONY S12", "Green", true,8500);
+		MobileEntity entity = new MobileEntity("Nokia 1100", "Black", true,2500);
+		MobileEntity entity1 = new MobileEntity("Xiomi X5", "Gold", true,19000);
 		
 	
-		MobileDAO dao = new MobileDAOImpl();
-		dao.save(entity);
-		dao.save(entity1);
-		dao.read(2);
+		MobileService service = new MobileServiceImpl();
+		service.save(entity);
+		service.save(entity1);
+		//dao1.read(2);
 		
-		System.out.println(dao.readPriceByName());
+		System.out.println(service.readPriceByName("Samsung S8"));
 		
-		System.out.println(dao.readTotalPrice());
+		System.out.println(service.readTotalPrice());
 		
-		System.out.println(dao.readMaxPrice());
+		System.out.println(service.readMaxPrice());
 		
-		System.out.println(dao.readMinPrice());
+		System.out.println(service.readMinPrice());
 		
-		System.out.println(dao.updatePriceById());
+		service.updatePriceByName(28000,"Realme 5");
 	}
 
 }

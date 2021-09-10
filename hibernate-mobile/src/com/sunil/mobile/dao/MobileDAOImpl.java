@@ -41,12 +41,13 @@ public class MobileDAOImpl implements MobileDAO{
 		}
 	}
 	@Override
-	public double readPriceByName() {
+	public double readPriceByName(String name) {
 		System.out.println("invoked readPriceByName()");
 	Session session=null;
 		try {
 			session=factory.openSession();
-			Query query = session.createQuery(" select price from MobileEntity where name='SONY' ");
+			Query query = session.createQuery(" select price from MobileEntity where name=:Name");
+			query.setParameter("Name", name);
 			Object obj = query.uniqueResult();
 			if(obj!=null) {
 				Double price = (Double) obj;
@@ -151,15 +152,16 @@ public class MobileDAOImpl implements MobileDAO{
 		return 0;
 	}
 	
-	public int updatePriceById() {
+	public void updatePriceByName(double price,String name) {
 		try (Session session = factory.openSession()) {
-			Query query = session.createQuery("update MobileEntity mobile set mobile.price='25000' where mobile.id='1'");
+			Query query = session.createQuery("update MobileEntity mobile set mobile.price=:Price where mobile.name=:Name");
+			query.setParameter("Price", price);
+			query.setParameter("Name", name);
 			session.beginTransaction();
 			query.executeUpdate();
 			session.getTransaction().commit();
 			
 		}
-		return 0;
 	}
 
 
