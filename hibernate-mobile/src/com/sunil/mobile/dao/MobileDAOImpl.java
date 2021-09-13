@@ -33,7 +33,7 @@ public class MobileDAOImpl implements MobileDAO{
 	@Override
 	public void read(int id) {
 		try (Session session = factory.openSession()) {
-			Query query = session.createQuery("from MobileEntity");
+			Query query = session.getNamedQuery("read");
 			List<MobileEntity> list = query.list();
 			for (MobileEntity mobileEntity : list) {
 				System.out.println(mobileEntity);
@@ -46,7 +46,7 @@ public class MobileDAOImpl implements MobileDAO{
 	Session session=null;
 		try {
 			session=factory.openSession();
-			Query query = session.createQuery(" select price from MobileEntity where name=:Name");
+			Query query = session.getNamedQuery("readPriceByName");
 			query.setParameter("Name", name);
 			Object obj = query.uniqueResult();
 			if(obj!=null) {
@@ -74,7 +74,7 @@ public class MobileDAOImpl implements MobileDAO{
 		Session session=null;
 			try {
 				session=factory.openSession();
-				Query query = session.createQuery(" select sum(price) from MobileEntity ");
+				Query query = session.getNamedQuery("readTotalPrice");
 				Object obj = query.uniqueResult();
 				if(obj!=null) {
 					Double totalprice = (Double) obj;
@@ -102,7 +102,7 @@ public class MobileDAOImpl implements MobileDAO{
 		Session session=null;
 			try {
 				session=factory.openSession();
-				Query query = session.createQuery(" select max(price) from MobileEntity ");
+				Query query = session.getNamedQuery("readMaxPrice");
 				Object obj = query.uniqueResult();
 				if(obj!=null) {
 					Double maxprice = (Double) obj;
@@ -130,7 +130,7 @@ public class MobileDAOImpl implements MobileDAO{
 		Session session=null;
 			try {
 				session=factory.openSession();
-				Query query = session.createQuery(" select min(price) from MobileEntity ");
+				Query query = session.getNamedQuery("readMinPrice");
 				Object obj = query.uniqueResult();
 				if(obj!=null) {
 					Double minprice = (Double) obj;
@@ -154,7 +154,7 @@ public class MobileDAOImpl implements MobileDAO{
 	
 	public void updatePriceByName(double price,String name) {
 		try (Session session = factory.openSession()) {
-			Query query = session.createQuery("update MobileEntity mobile set mobile.price=:Price where mobile.name=:Name");
+			Query query = session.getNamedQuery("updatePriceByName");
 			query.setParameter("Price", price);
 			query.setParameter("Name", name);
 			session.beginTransaction();

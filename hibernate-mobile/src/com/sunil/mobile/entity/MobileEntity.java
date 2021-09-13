@@ -7,10 +7,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "mobile")
+@NamedQuery(name="read",query="from MobileEntity")
+@NamedQuery(name="readPriceByName",query="select price from MobileEntity where name=:Name")
+@NamedQuery(name="readTotalPrice",query="select sum(price) from MobileEntity")
+@NamedQuery(name="readMaxPrice",query=" select max(price) from MobileEntity")
+@NamedQuery(name="readMinPrice",query=" select min(price) from MobileEntity")
+@NamedQuery(name="updatePriceByName",query="update MobileEntity mobile set mobile.price=:Price where mobile.name=:Name")
 public class MobileEntity implements Serializable{
 	
 	@Column(name="m_id")
